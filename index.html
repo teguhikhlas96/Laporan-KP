@@ -1,0 +1,1116 @@
+
+        <!DOCTYPE html>
+        <html lang="id">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Hasil Penempatan Pembimbing KP</title>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                
+                body {
+                    font-family: 'Inter', sans-serif;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    min-height: 100vh;
+                    padding: 20px;
+                    color: #2d3748;
+                }
+                
+                .container {
+                    max-width: 1600px;
+                    margin: 0 auto;
+                }
+                
+                /* Header */
+                .header {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 40px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                    text-align: center;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .header::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 6px;
+                    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+                    background-size: 200% 100%;
+                    animation: gradient 3s ease infinite;
+                }
+                
+                @keyframes gradient {
+                    0%, 100% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                }
+                
+                .header h1 {
+                    font-size: 2.5em;
+                    font-weight: 700;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    margin-bottom: 10px;
+                }
+                
+                .header h2 {
+                    font-size: 1.5em;
+                    color: #4a5568;
+                    font-weight: 500;
+                    margin-bottom: 5px;
+                }
+                
+                .header p {
+                    color: #718096;
+                    font-size: 1.1em;
+                }
+                
+                /* Info Box */
+                .info-box {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                    border-left: 6px solid #667eea;
+                }
+                
+                .info-box h3 {
+                    font-size: 1.5em;
+                    margin-bottom: 20px;
+                    color: #2d3748;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                
+                .info-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 15px;
+                }
+                
+                .info-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 15px;
+                    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+                    border-radius: 12px;
+                    transition: transform 0.3s ease;
+                }
+                
+                .info-item:hover {
+                    transform: translateX(5px);
+                }
+                
+                .info-icon {
+                    width: 40px;
+                    height: 40px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 1.2em;
+                }
+                
+                /* Search Box */
+                .search-container {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 25px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                }
+                
+                .search-wrapper {
+                    position: relative;
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+                
+                .search-icon {
+                    position: absolute;
+                    left: 20px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #667eea;
+                    font-size: 1.2em;
+                }
+                
+                #searchInput {
+                    width: 100%;
+                    padding: 18px 20px 18px 55px;
+                    border: 2px solid #e2e8f0;
+                    border-radius: 15px;
+                    font-size: 1em;
+                    font-family: 'Inter', sans-serif;
+                    transition: all 0.3s ease;
+                    background: #f7fafc;
+                }
+                
+                #searchInput:focus {
+                    outline: none;
+                    border-color: #667eea;
+                    background: white;
+                    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+                }
+                
+                /* Filter Buttons */
+                .filter-container {
+                    display: flex;
+                    gap: 10px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    margin-top: 20px;
+                }
+                
+                .filter-btn {
+                    padding: 10px 20px;
+                    border: 2px solid #e2e8f0;
+                    background: white;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-weight: 600;
+                    font-size: 0.9em;
+                }
+                
+                .filter-btn:hover {
+                    background: #667eea;
+                    color: white;
+                    border-color: #667eea;
+                    transform: translateY(-2px);
+                }
+                
+                .filter-btn.active {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    border-color: transparent;
+                }
+                
+                /* Table Container */
+                .table-container {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                    overflow: hidden;
+                }
+                
+                .table-wrapper {
+                    overflow-x: auto;
+                }
+                
+                table {
+                    width: 100%;
+                    border-collapse: separate;
+                    border-spacing: 0;
+                }
+                
+                thead {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    position: sticky;
+                    top: 0;
+                    z-index: 10;
+                }
+                
+                th {
+                    padding: 18px 15px;
+                    text-align: left;
+                    font-weight: 600;
+                    color: white;
+                    font-size: 0.9em;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+                
+                td {
+                    padding: 18px 15px;
+                    border-bottom: 1px solid #f7fafc;
+                    color: #4a5568;
+                }
+                
+                tbody tr {
+                    transition: all 0.3s ease;
+                }
+                
+                tbody tr:hover {
+                    background: linear-gradient(90deg, #f7fafc 0%, #ffffff 100%);
+                    transform: scale(1.005);
+                    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+                }
+                
+                .highlight-mengulang {
+                    background: linear-gradient(90deg, #fff9e6 0%, #ffffff 100%);
+                    border-left: 5px solid #f59e0b;
+                }
+                
+                .highlight-perempuan {
+                    background: linear-gradient(90deg, #fff0f6 0%, #ffffff 100%);
+                }
+                
+                .dosen-cell {
+                    font-weight: 700;
+                    color: #667eea;
+                    font-size: 1.05em;
+                }
+                
+                .badge {
+                    display: inline-block;
+                    padding: 6px 14px;
+                    border-radius: 20px;
+                    font-size: 0.85em;
+                    font-weight: 600;
+                }
+                
+                .badge-mengulang {
+                    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                    color: white;
+                }
+                
+                .badge-baru {
+                    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+                    color: white;
+                }
+                
+                .badge-female {
+                    background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+                    color: white;
+                }
+                
+                .badge-male {
+                    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                    color: white;
+                }
+                
+                /* Footer */
+                .footer {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    margin-top: 30px;
+                    text-align: center;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                }
+                
+                .footer-content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    color: #718096;
+                }
+                
+                .footer-highlight {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 8px 16px;
+                    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+                    border-radius: 10px;
+                    margin: 0 5px;
+                }
+                
+                /* Stats Summary */
+                .stats-summary {
+                    background: white;
+                    border-radius: 20px;
+                    padding: 30px;
+                    margin-bottom: 30px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                }
+                
+                .stats-summary h3 {
+                    font-size: 1.5em;
+                    margin-bottom: 20px;
+                    color: #2d3748;
+                    text-align: center;
+                }
+                
+                .stats-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    gap: 15px;
+                }
+                
+                .stat-item {
+                    text-align: center;
+                    padding: 20px;
+                    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+                    border-radius: 15px;
+                    transition: transform 0.3s ease;
+                }
+                
+                .stat-item:hover {
+                    transform: translateY(-5px);
+                }
+                
+                .stat-number {
+                    font-size: 2.5em;
+                    font-weight: 700;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+                
+                .stat-text {
+                    color: #4a5568;
+                    font-size: 0.9em;
+                    margin-top: 5px;
+                }
+                
+                /* Responsive */
+                @media (max-width: 768px) {
+                    .header h1 { font-size: 1.8em; }
+                    .header h2 { font-size: 1.2em; }
+                    .info-grid { grid-template-columns: 1fr; }
+                    .stats-grid { grid-template-columns: 1fr; }
+                    .filter-container { flex-direction: column; }
+                    .table-container { padding: 15px; }
+                    th, td { padding: 12px 8px; font-size: 0.85em; }
+                }
+                
+                /* Loading Animation */
+                .loading {
+                    display: none;
+                    text-align: center;
+                    padding: 40px;
+                }
+                
+                .spinner {
+                    border: 4px solid #f3f3f3;
+                    border-top: 4px solid #667eea;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    animation: spin 1s linear infinite;
+                    margin: 0 auto;
+                }
+                
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1><i class="fas fa-graduation-cap"></i> Hasil Penempatan Pembimbing KP</h1>
+                    <h2>Semester Ganjil 2025-2026</h2>
+                    <p>Program Studi Teknik Informatika</p>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-bullhorn"></i> Informasi Penting</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-check-circle"></i></div>
+                            <span>Silakan catat pembimbing yang telah ditetapkan</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-phone"></i></div>
+                            <span>Hubungi pembimbing untuk koordinasi lebih lanjut</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-clipboard-check"></i></div>
+                            <span>Pastikan judul dan lokasi KP sudah final</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fas fa-star"></i></div>
+                            <span>Prioritas: Distribusi merata → Gender → Pilihan</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="stats-summary">
+                    <h3><i class="fas fa-chart-bar"></i> Ringkasan Statistik</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">43</div>
+                            <div class="stat-text">Total Mahasiswa</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10</div>
+                            <div class="stat-text">Perempuan</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">33</div>
+                            <div class="stat-text">Laki-laki</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">38</div>
+                            <div class="stat-text">Mengulang</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-text">Baru</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">12</div>
+                            <div class="stat-text">Dosen Pembimbing</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Cari berdasarkan NIM, Nama, atau Dosen Pembimbing...">
+                    </div>
+                    <div class="filter-container">
+                        <button class="filter-btn active" onclick="filterTable('all')">
+                            <i class="fas fa-list"></i> Semua
+                        </button>
+                        <button class="filter-btn" onclick="filterTable('mengulang')">
+                            <i class="fas fa-redo"></i> Mengulang
+                        </button>
+                        <button class="filter-btn" onclick="filterTable('baru')">
+                            <i class="fas fa-star"></i> Baru
+                        </button>
+                        <button class="filter-btn" onclick="filterTable('perempuan')">
+                            <i class="fas fa-venus"></i> Perempuan
+                        </button>
+                        <button class="filter-btn" onclick="filterTable('laki')">
+                            <i class="fas fa-mars"></i> Laki-laki
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Memuat data...</p>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="mahasiswaTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIM</th>
+                                    <th>Nama</th>
+                                    <th>Angkatan</th>
+                                    <th>Status</th>
+                                    <th>Gender</th>
+                                    <th>Judul KP</th>
+                                    <th>Lokasi KP</th>
+                                    <th>Dosen Pembimbing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+        
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>1</strong></td>
+                                    <td><strong>2203010082</strong></td>
+                                    <td>Sofa Tajul Afifah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Perancangan Sistem Surat Masuk dan Surat Keluar Berbasis Web</td>
+                                    <td>Desa Kurniabakti, Ciawi</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Ruuhwan, ST., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>2</strong></td>
+                                    <td><strong>2203010075</strong></td>
+                                    <td>Bintang Pratama Putra</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Rancang Bangun Sistem Informasi Manajemen Showroom Mobil Bek...</td>
+                                    <td>Showroom Mulya Motor</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Dede Syahrul Anwar, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="" data-status="Baru (B)" data-gender="Laki-laki">
+                                    <td><strong>3</strong></td>
+                                    <td><strong>2203010050</strong></td>
+                                    <td>Wanda Julianto</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-baru">Baru (B)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Pengembangan Website Sistem Informasi Manajemen Inventory un...</td>
+                                    <td>Astrajingga Adventure</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Aso Sudiarjo, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>4</strong></td>
+                                    <td><strong>2203010084</strong></td>
+                                    <td>Rifansyah Iqramullah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Perancangan dan Implementasi Aplikasi Laporan Peternakan Aya...</td>
+                                    <td>kelompok tani pangadegan</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Shinta Siti Sundari, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>5</strong></td>
+                                    <td><strong>2203010116</strong></td>
+                                    <td>Selma Salsabila</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Aplikasi Arsip Dokumen berbasis WEB</td>
+                                    <td>Kantor Desa Tawangbanteng</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Missi Hikmatyar, M.Kom.,</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>6</strong></td>
+                                    <td><strong>2203010083</strong></td>
+                                    <td>Dwi Fajar Sari Roma Dona</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Media pembelajaran ipa menggunakan metode mdlc</td>
+                                    <td>SDN NAGARAWANGI</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Aso Sudiarjo, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>7</strong></td>
+                                    <td><strong>2203010334</strong></td>
+                                    <td>Sepia Ayu Permatasari</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Perancangan sistem informasi perpustakaan berbasis web smk p...</td>
+                                    <td>SMK Plus Darunnajah</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Yusuf Sumaryana, ST.,M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>8</strong></td>
+                                    <td><strong>2203010395</strong></td>
+                                    <td>Ari</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Pemanfaatan Microsoft Excel sebagai Sistem Informasi Pengamb...</td>
+                                    <td>PT.FBI ( FAHRUL BERKAH INDONESIA)</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Ruuhwan, ST., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>9</strong></td>
+                                    <td><strong>2203010074</strong></td>
+                                    <td>Rega Rahmat Algifary</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Penerapan Sistem Distribusi Berbasis Web Sebagai Solusi Mana...</td>
+                                    <td>PT. Inti Walet Abadi (Distributor Benang...</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Missi Hikmatyar, M.Kom.,</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>10</strong></td>
+                                    <td><strong>2203010124</strong></td>
+                                    <td>Farhan Maulana Hakim</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>.</td>
+                                    <td>Ciawi</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Aso Sudiarjo, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>11</strong></td>
+                                    <td><strong>2203010056</strong></td>
+                                    <td>Indra Sandy</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Media Pembelanaran Matematika untuk siswa kelas 5 SD</td>
+                                    <td>SDN Medangharuman</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Yusuf Sumaryana, ST.,M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>12</strong></td>
+                                    <td><strong>2203010089</strong></td>
+                                    <td>Agi Nurhidayat</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Pengembangan aplikasi Pengelola Inventory Gudang berbasis we...</td>
+                                    <td>Toko Mauza Frozen</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Rudi Hartono, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="" data-status="Baru (B)" data-gender="Laki-laki">
+                                    <td><strong>13</strong></td>
+                                    <td><strong>2103010060</strong></td>
+                                    <td>Ginda Juniar</td>
+                                    <td>2021</td>
+                                    <td><span class="badge badge-baru">Baru (B)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>sistem informasi uang kas di SDN Empangsari</td>
+                                    <td>SDN EMPANGSARI</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Yusuf Sumaryana, ST.,M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>14</strong></td>
+                                    <td><strong>2203010069</strong></td>
+                                    <td>Daffa Hesaputra Pratama</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Pengembangan Media Pembelajaran Interaktif Berbasis Multimed...</td>
+                                    <td>Belum mengisi lokasi</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Agus Supriatman, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="" data-status="Baru (B)" data-gender="Laki-laki">
+                                    <td><strong>15</strong></td>
+                                    <td><strong>2203010040</strong></td>
+                                    <td>Fauzan Ardiansyah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-baru">Baru (B)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>.</td>
+                                    <td>.</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Rudi Hartono, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="" data-status="Baru (B)" data-gender="Laki-laki">
+                                    <td><strong>16</strong></td>
+                                    <td><strong>2203010279</strong></td>
+                                    <td>Raden Muhammad Ricky Putra Narayana</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-baru">Baru (B)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Sistem Informasi / Aplikasi Mobile Pemesanan dan Pembelian P...</td>
+                                    <td>Jl. KHZ Mustofa No. 326. Ruko Asia Plaza...</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Agus Supriatman, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>17</strong></td>
+                                    <td><strong>2203010091</strong></td>
+                                    <td>Agus Ihsan</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Perancangan Sistem Informasi Pelaporan Warga Berbasis Web Pa...</td>
+                                    <td>Desa karangmulya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teguh Ikhlas R, M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>18</strong></td>
+                                    <td><strong>2203010057</strong></td>
+                                    <td>Dhafin Ilyasa Athallah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Perancangan Sistem Informasi Pengelolaan Inventori Stok Bara...</td>
+                                    <td>Kopi & Rempah Trem</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Evi Dewi Sri Mulyani, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>19</strong></td>
+                                    <td><strong>2203010055</strong></td>
+                                    <td>Ega Nurfadillah Almunawaroh</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Aplikasi pembelajaran interaktif</td>
+                                    <td>Belum mengisi lokasi</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Rudi Hartono, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>20</strong></td>
+                                    <td><strong>2203010002</strong></td>
+                                    <td>Mochamad Fauzan Diva Kusumah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Sistem Informasi Pendataan Bantuan Sosial</td>
+                                    <td>Kantor Desa Cimari</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teuku Mufizar, S.Kom., M.kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>21</strong></td>
+                                    <td><strong>2203010494</strong></td>
+                                    <td>Wandi Nurjaman</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>RANCANG BANGUN SISTEM INFORMASI WEB PROFILE LINGKUNG SENI JA...</td>
+                                    <td>Lingkung seni jani krama</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Cepi Rahmat Hidayat, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>22</strong></td>
+                                    <td><strong>2203010221</strong></td>
+                                    <td>Arief Dwi Poernama</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Profile Puskesmas pembantu desa kertasari,Ciamis</td>
+                                    <td>Puskesmas Kertasari</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Dede Syahrul Anwar, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>23</strong></td>
+                                    <td><strong>2203010005</strong></td>
+                                    <td>Riyan Media Febriana</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Sistem Arsip Dokumen Guru dan Siswa Berbasis WEB di SDN CIPO...</td>
+                                    <td>SDN CIPONDOK</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Shinta Siti Sundari, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>24</strong></td>
+                                    <td><strong>2203010150</strong></td>
+                                    <td>Nurkamilah Silviyani</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>-</td>
+                                    <td>Tasikmalaya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Agus Supriatman, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>25</strong></td>
+                                    <td><strong>2203010139</strong></td>
+                                    <td>Sonia Ari Murti</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Pengembangan Media Pembelajaran Berbasis Multimedia Untuk Pe...</td>
+                                    <td>Paudqu Afiah</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teguh Ikhlas R, M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>26</strong></td>
+                                    <td><strong>2203010275</strong></td>
+                                    <td>Taqi Muhammad Husein</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>PENGEMBANGAN SISTEM MANAJEMEN KEUANGAN CERDAS UNTUK LAYANAN ...</td>
+                                    <td>Jl.Mang Koko (Samping Kantor Kelurahan S...</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Ruuhwan, ST., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>27</strong></td>
+                                    <td><strong>2203010167</strong></td>
+                                    <td>Alfian Nugroho Suparman</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>SISTEM INFORMASI SIMPANAN PRIMKOP KARTIKA GALUH CIAMIS BERBA...</td>
+                                    <td>PRIMKOP KARTIKA GALUH CIAMIS</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Missi Hikmatyar, M.Kom.,</td>
+                                </tr>
+            
+                                <tr class="" data-status="Baru (B)" data-gender="Laki-laki">
+                                    <td><strong>28</strong></td>
+                                    <td><strong>2303010177</strong></td>
+                                    <td>R Deni Nur Rahmawam</td>
+                                    <td>2023</td>
+                                    <td><span class="badge badge-baru">Baru (B)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Computer base test</td>
+                                    <td>SmaN2 Ciamis</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teguh Ikhlas R, M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>29</strong></td>
+                                    <td><strong>2003010020</strong></td>
+                                    <td>Rifa Nur Aeni Gunawan</td>
+                                    <td>2020</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Perancangan Sistem Informasi Ekstrakurikuler Berbasis Web me...</td>
+                                    <td>SMPN 19 Kota Tasikmalaya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Evi Dewi Sri Mulyani, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>30</strong></td>
+                                    <td><strong>2203010061</strong></td>
+                                    <td>Andra Nugraha</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Penerapan Otentikasi Admin Menggunakan JWT (JSON Web Token) ...</td>
+                                    <td>Desa Sirnasari</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Aso Sudiarjo, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>31</strong></td>
+                                    <td><strong>2203010129</strong></td>
+                                    <td>Thirza Naila Shaumi</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>Pengembangan Aplikasi Perpustakaan SMP Berbasis Android untu...</td>
+                                    <td>SMPN 18 Tasikmalaya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teuku Mufizar, S.Kom., M.kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>32</strong></td>
+                                    <td><strong>2003010077</strong></td>
+                                    <td>Alfan Fauzan Nasyir</td>
+                                    <td>2020</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Web profile</td>
+                                    <td>toko perlengkapan</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Yusuf Sumaryana, ST.,M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>33</strong></td>
+                                    <td><strong>2203010026</strong></td>
+                                    <td>Muhammad Hijran Patharani</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Aplikasi pendataan bansos</td>
+                                    <td>desa sariwangi</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Rudi Hartono, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>34</strong></td>
+                                    <td><strong>2203010028</strong></td>
+                                    <td>Lutpi Sahri Ramdani</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Perancangan aplikasi media pembelajaran untuk siswa sekolah ...</td>
+                                    <td>Sdn Kotabaru</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Agus Supriatman, ST., M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>35</strong></td>
+                                    <td><strong>2203010521</strong></td>
+                                    <td>Mohamad Asep Purqon Nul Hakim</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>PERANCANGAN SISTEM CHATBOT PELAYANAN PELANGGAN BERBASIS TELE...</td>
+                                    <td>Toko kacamata aziz jaya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teguh Ikhlas R, M.Kom</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>36</strong></td>
+                                    <td><strong>2203010514</strong></td>
+                                    <td>Agy Andhikal H</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>SISTEM KONSULTASI ONLINE DAN MANAJEMEN TOKO KACAMATA BERBASI...</td>
+                                    <td>toko kacamata</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Evi Dewi Sri Mulyani, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>37</strong></td>
+                                    <td><strong>2203010143</strong></td>
+                                    <td>Muhammad Ali Irfan Ukasah</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>APLIKASI INTERAKTIF PEMODELAN GEOMETRI 3D DENGAN AUGMENTED R...</td>
+                                    <td>SDN Cilamajang</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Teuku Mufizar, S.Kom., M.kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>38</strong></td>
+                                    <td><strong>2203010117</strong></td>
+                                    <td>Rizki Nugraha</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>sistem pos (point of sale) untuk manajemen penjualan dan sto...</td>
+                                    <td>Toko Timephone</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Cepi Rahmat Hidayat, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>39</strong></td>
+                                    <td><strong>2203010015</strong></td>
+                                    <td>Dzikri Muhamad Romadhoni</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Media pembelajaran interaktif sejarah bandung lautan api</td>
+                                    <td>Smk Bhakti Kencana</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Dede Syahrul Anwar, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>40</strong></td>
+                                    <td><strong>2203010003</strong></td>
+                                    <td>Ryandi Maulana Hafid</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Rancang bangun presensi guru berbasis web</td>
+                                    <td>Sdn 1 salawu</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Shinta Siti Sundari, M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>41</strong></td>
+                                    <td><strong>2203010013</strong></td>
+                                    <td>Ilham Rizqi Pratama</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>pengaduan Masyarakat berbasis website</td>
+                                    <td>kelurahan tawangsari</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Ruuhwan, ST., M.Kom.</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang" data-status="Mengulang (M)" data-gender="Laki-laki">
+                                    <td><strong>42</strong></td>
+                                    <td><strong>2203010012</strong></td>
+                                    <td>Sendy Septyawan Rudi</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-male">Laki-laki</span></td>
+                                    <td>Sistem Informasi Bank Sampah berbasis Web</td>
+                                    <td>Dinas lingkungan hidup Kota Tasikmalaya</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Missi Hikmatyar, M.Kom.,</td>
+                                </tr>
+            
+                                <tr class="highlight-mengulang highlight-perempuan" data-status="Mengulang (M)" data-gender="Perempuan">
+                                    <td><strong>43</strong></td>
+                                    <td><strong>2203010553</strong></td>
+                                    <td>Syabila Fitria Garnada</td>
+                                    <td>2022</td>
+                                    <td><span class="badge badge-mengulang">Mengulang (M)</span></td>
+                                    <td><span class="badge badge-female">Perempuan</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td class="dosen-cell"><i class="fas fa-user-tie"></i> Cepi Rahmat Hidayat, S.Kom., M.Kom.</td>
+                                </tr>
+            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="footer-content">
+                        <p><strong>Keterangan:</strong></p>
+                        <p>
+                            <span class="footer-highlight">
+                                <i class="fas fa-square" style="color: #fff9e6;"></i>
+                                Mahasiswa Mengulang (Prioritas)
+                            </span>
+                            <span class="footer-highlight">
+                                <i class="fas fa-square" style="color: #fff0f6;"></i>
+                                Mahasiswa Perempuan
+                            </span>
+                        </p>
+                        <p style="margin-top: 15px; font-size: 0.9em;">
+                            <em>Laporan dibuat pada: 04 October 2025, 05:19:55 WIB</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Search functionality
+                function searchTable() {
+                    const input = document.getElementById("searchInput");
+                    const filter = input.value.toUpperCase();
+                    const table = document.getElementById("mahasiswaTable");
+                    const tr = table.getElementsByTagName("tr");
+                    
+                    for (let i = 1; i < tr.length; i++) {
+                        const td = tr[i].getElementsByTagName("td");
+                        let found = false;
+                        
+                        for (let j = 0; j < td.length; j++) {
+                            if (td[j]) {
+                                const txtValue = td[j].textContent || td[j].innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        tr[i].style.display = found ? "" : "none";
+                    }
+                }
+                
+                // Filter functionality
+                function filterTable(type) {
+                    const table = document.getElementById("mahasiswaTable");
+                    const tr = table.getElementsByTagName("tr");
+                    const buttons = document.querySelectorAll('.filter-btn');
+                    
+                    // Update active button
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    event.target.closest('.filter-btn').classList.add('active');
+                    
+                    for (let i = 1; i < tr.length; i++) {
+                        const status = tr[i].getAttribute('data-status');
+                        const gender = tr[i].getAttribute('data-gender');
+                        
+                        if (type === 'all') {
+                            tr[i].style.display = "";
+                        } else if (type === 'mengulang') {
+                            tr[i].style.display = status.includes('Mengulang') ? "" : "none";
+                        } else if (type === 'baru') {
+                            tr[i].style.display = status.includes('Baru') ? "" : "none";
+                        } else if (type === 'perempuan') {
+                            tr[i].style.display = gender === 'Perempuan' ? "" : "none";
+                        } else if (type === 'laki') {
+                            tr[i].style.display = gender === 'Laki-laki' ? "" : "none";
+                        }
+                    }
+                }
+                
+                // Add event listener for search
+                document.getElementById("searchInput").addEventListener("keyup", searchTable);
+            </script>
+        </body>
+        </html>
+        
